@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
 const { Schema } = mongoose;
 const { compareSync, hashSync, genSaltSync, getSalt } = require('bcryptjs');
 
@@ -48,6 +49,6 @@ UserSchema.pre('save', async function (next) {
 	next();
 });
 
-usuarioSchema.plugin(uniqueValidator, { message: '{PATH} debe de ser único' });
+UserSchema.plugin(uniqueValidator, { message: '{PATH} debe de ser único' });
 
 module.exports = mongoose.model('user', UserSchema);

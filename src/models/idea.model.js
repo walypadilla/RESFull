@@ -4,8 +4,22 @@ const { Schema } = mongoose;
 const IdeaSchema = new Schema({
 	ide: { type: String, required: [true, 'La ide es requerida'] },
 	description: { type: String },
-	upvotes: [{ type: Schema.Types.ObjectId, ref: 'user', autopopulate: true }],
-	downvotes: [{ type: Schema.Types.ObjectId, ref: 'user', autopopulate: true }],
+	upvotes: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'user',
+			autopopulate: true,
+			type: Boolean,
+		},
+	],
+	downvotes: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'user',
+			autopopulate: true,
+			type: Boolean,
+		},
+	],
 	author: {
 		type: Schema.Types.ObjectId,
 		ref: 'user',
