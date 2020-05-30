@@ -16,7 +16,7 @@ const UserSchema = new Schema({
 		required: [true, 'El username es obligatorio'],
 	},
 	password: { type: String, required: [true, 'El password es obligatorio'] },
-	emal: { type: String, unique: true, required: true },
+	email: { type: String, unique: true, required: true, index: true },
 	role: { type: String, default: 'USER_ROLE', enum: rolesValidos },
 	google: { type: Boolean, default: false },
 });
@@ -30,7 +30,7 @@ UserSchema.methods.toJSON = function () {
 	return userObject;
 };
 
-UserSchema.method.comparePasswords = function (password) {
+UserSchema.methods.comparePasswords = function (password) {
 	return compareSync(password, this.password);
 };
 
@@ -42,7 +42,7 @@ UserSchema.pre('save', async function (next) {
 	}
 
 	// encriptando contraseña con el hashSync
-	const salt = getSaltSync(10);
+	const salt = genSaltSync(10);
 	const hashedPassword = hashSync(user.password, salt);
 	user.password = hashedPassword;
 
