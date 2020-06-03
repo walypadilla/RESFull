@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const IdeaSchema = new Schema({
-	ide: { type: String, required: [true, 'La ide es requerida'] },
+	idea: { type: String, required: [true, 'La ide es requerida'] },
 	description: { type: String },
 	upvotes: [
 		{
